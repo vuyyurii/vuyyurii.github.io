@@ -1,0 +1,7 @@
+<pre>
+[heading] No Locks, No Cry  Non-Blocking Data Structures. [/heading]
+[text] // VOLATILE READ before key compare.  
+// cas 
+private final boolean CAS kvs( final Object[]  oldkvs, final Object[] newkvs ) { 
+return _unsafe.compareAndSwapObject (this, _kvs_offset, oldkvs, newkvs );  } [/text]
+[text] 0xdata [/text]</pre>

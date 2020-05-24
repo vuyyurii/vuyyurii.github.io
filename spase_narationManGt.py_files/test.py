@@ -1,27 +1,54 @@
-import xlsxwriter
+# import xlsxwriter
 
 
-# Create an new Excel file and add a worksheet.
-workbook = xlsxwriter.Workbook('images.xlsx')
-worksheet = workbook.add_worksheet()
+# # Create an new Excel file and add a worksheet.
+# workbook = xlsxwriter.Workbook('images.xlsx')
+# worksheet = workbook.add_worksheet()
 
-# Widen the first column to make the text clearer.
-# worksheet.set_column('A:A', 30)
+# # Widen the first column to make the text clearer.
+# # worksheet.set_column('A:A', 30)
 
-# # Insert an image.
-# worksheet.write('A2', 'Insert an image in a cell:')
-# worksheet.insert_image('B2', 'python.png')
+# # # Insert an image.
+# # worksheet.write('A2', 'Insert an image in a cell:')
+# # worksheet.insert_image('B2', 'python.png')
 
-# # Insert an image offset in the cell.
-# worksheet.write('A12', 'Insert an image with an offset:')
-# worksheet.insert_image('B12', 'python.png', {'x_offset': 15, 'y_offset': 10})
+# # # Insert an image offset in the cell.
+# # worksheet.write('A12', 'Insert an image with an offset:')
+# # worksheet.insert_image('B12', 'python.png', {'x_offset': 15, 'y_offset': 10})
 
-# # Insert an image with scaling.
-# worksheet.write('A23', 'Insert a scaled image:')
-worksheet.insert_image('B2', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
+# # # Insert an image with scaling.
+# # worksheet.write('A23', 'Insert a scaled image:')
+# worksheet.insert_image('B2', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
 
-worksheet.insert_image('B12', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
-worksheet.insert_image('G2', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
-worksheet.insert_image('G12', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
+# worksheet.insert_image('B12', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
+# worksheet.insert_image('G2', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
+# worksheet.insert_image('G12', '118971_slide-005.jpg', {'x_scale': 0.25, 'y_scale': 0.25})
+# file1 = open("118971_slide-005.asc","r")  
+  
+# text = file1.read() 
+# # text = 'A textbox with some long text that wraps around onto several lines'
+# worksheet.insert_textbox(30, 2, text)
+# worksheet.write
 
-workbook.close()
+# workbook.close()
+
+from os import listdir
+from os.path import isfile, join
+onlyfiles = [f for f in listdir('./') if isfile(join('./', f))]
+for i in range(len(onlyfiles)):
+	temp = onlyfiles[i]
+	res = temp.find(".asc") 
+	if res >= 0:
+		f = open(temp, "r")
+		contents = f.read()
+		contents = contents.replace(">", "]")
+		contents = contents.replace("<", "[")
+		f.close()
+		contents = "<pre>" + contents + "</pre>"
+		# break
+		f = open(temp.replace(".asc", ".html"), "w")
+		f.write(contents)
+		f.close()
+    	# print ("for is present in GeeksforGeeks")
+	else:
+		continue
